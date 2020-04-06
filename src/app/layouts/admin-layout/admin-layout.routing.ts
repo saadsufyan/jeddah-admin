@@ -15,6 +15,7 @@ import { ShopsComponent } from 'app/pages/shops/shops.component';
 import { ShopsDetailsComponent } from 'app/pages/shops-details/shops-details.component';
 import { ShopsOrdersComponent } from 'app/pages/shops-orders/shops-orders.component';
 import { CustomerOrdersComponent } from 'app/pages/customer-orders/customer-orders.component';
+import { CustomerDetailsComponent } from 'app/pages/customer-details/customer-details.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -22,9 +23,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'category-detail',      component: AddMainCategoryComponent },
     { path: 'customers-list',      component: CustomerListComponent },
     { path: 'shops',      component: ShopsComponent },
-    { path: 'shop-details',      component: ShopsDetailsComponent },
-    { path: 'shop-order',      component: ShopsOrdersComponent },
-    { path: 'customer-orders',      component: CustomerOrdersComponent },
+    { path: 'shop-details/:id',      component: ShopsDetailsComponent },
+    { path: 'shop-orders/:id',      component: ShopsOrdersComponent },
+    { path: 'customer-orders/:id',      component: CustomerOrdersComponent },
+    { path: 'customer-details/:id',      component: CustomerDetailsComponent },
     { path: 'user',           component: UserComponent },
     { path: 'table',          component: TableComponent },
     { path: 'typography',     component: TypographyComponent },

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { OrdersService } from 'app/services/orders/orders.service';
 import { Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomerService } from 'app/services/customer/customer.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-customer-orders',
@@ -18,13 +18,20 @@ export class CustomerOrdersComponent implements OnInit, OnDestroy {
   orderList;
   id;
 
-  constructor(public customerApi: CustomerService, private spinner: NgxSpinnerService) { }
-
+  constructor(
+    public customerApi: CustomerService,
+    private activatedroute: ActivatedRoute,
+    private spinner: NgxSpinnerService) { }
   ngOnInit() {
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 25
     };
+    if (this.activatedroute.snapshot.params['id']) {
+      this.activatedroute.params.subscribe(params => {
+        this.id = params['id'];
+      });
+    }
     this.getUserOrders();
   }
   getUserOrders() {

@@ -1,1 +1,27 @@
-<p>shops-orders works!</p>
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Date</th>
+        <th>Shipping Address</th>
+        <th>Order Type</th>
+        <th>VAT</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <td>Delivery Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of shopOrders">
+        <td>{{ x.id }}</td>
+        <td>{{x.date | date: 'shortDate'}}</td>
+        <td>{{ x.shipping_address }}</td>
+        <td>{{ x.order_type}}</td>
+        <td>{{ x.vat}}</td>
+        <td>{{ x.total_amount}}</td>
+        <td>{{ x.status}}</td>
+        <td>{{ x.delivery_date}}</td>
+        </tr>
+    </tbody>
+    </table>
+    <ngx-spinner></ngx-spinner>

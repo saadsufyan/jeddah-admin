@@ -29,6 +29,7 @@ import { ShopsComponent } from 'app/pages/shops/shops.component';
 import { ShopsDetailsComponent } from 'app/pages/shops-details/shops-details.component';
 import { ShopsOrdersComponent } from 'app/pages/shops-orders/shops-orders.component';
 import { CustomerOrdersComponent } from 'app/pages/customer-orders/customer-orders.component';
+import { CustomerDetailsComponent } from 'app/pages/customer-details/customer-details.component';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { CustomerOrdersComponent } from 'app/pages/customer-orders/customer-orde
     CategoryComponent,
     AddMainCategoryComponent,
     CustomerListComponent,
+    CustomerDetailsComponent,
     CustomerOrdersComponent,
     ShopsComponent,
     ShopsDetailsComponent,

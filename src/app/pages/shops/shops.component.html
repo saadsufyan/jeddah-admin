@@ -20,8 +20,8 @@
     <td>{{ x.status}}</td>
     <td>
         <div class="col-md-12">
-            <button class="btn btn-primary"> Shop Details </button>
-            <button class="btn btn-primary"> Orders Details </button>
+            <button class="btn btn-primary" [routerLink]="['/shop-details', x.id]"> Shop Details </button>
+            <button class="btn btn-primary" [routerLink]="['/shop-orders', x.id]"> Shop Orders </button>
         </div>
     </td>
     </tr>
