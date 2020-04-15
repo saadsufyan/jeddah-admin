@@ -13,10 +13,18 @@ export class MainCategoryService {
     return this.http.get(`${environment.baseUrl}/admin/categories`);
   }
   create(body) {
-    return this.http.post(`${environment.baseUrl}/admin/add_categories`, body);
+    return this.http.post(`${environment.baseUrl}/admin/add_categories`, body, {
+      headers: {
+        'Content-Type': 'application/json'
+        }
+    });
   }
   update(body) {
-    return this.http.post(`${environment.baseUrl}/admin/edit_categories`, body);
+    return this.http.post(`${environment.baseUrl}/admin/edit_categories`, body,  {
+      headers: {
+        'Content-Type': 'application/json'
+        }
+    });
   }
   delete(body) {
     return this.http.post(`${environment.baseUrl}/admin/delete_categories`, body, {
@@ -24,9 +32,5 @@ export class MainCategoryService {
         'Content-Type': 'application/json'
         }
     });
-  }
-
-  createMainCategory(body) {
-    return this.http.post(`https://eventual-node.herokuapp.com/admin/main_category`, body);
   }
 }

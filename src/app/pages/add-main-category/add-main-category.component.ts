@@ -13,19 +13,10 @@ import { ActivatedRoute } from '@angular/router';
   providers: [SharedServiceService, MainCategoryService]
 })
 export class AddMainCategoryComponent implements OnInit, OnDestroy {
-  category = new FormGroup({
-    name: new FormControl(''),
-    arabic_name: new FormControl('')
-  });
-  // category = new FormGroup({
-  //   name: new FormControl(''),
-  //   name_arabic: new FormControl(''),
-  //   image: new FormControl(null),
-  //   date: new FormControl('')
-  // });
   CategoryId;
   CategoryData;
-
+  name;
+  arabic_name;
   constructor(
     private categoryService: MainCategoryService,
     private toastr: ToastrService,
@@ -36,13 +27,10 @@ export class AddMainCategoryComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.CategoryData = this.sharedService.fetchData();
-    console.log(this.CategoryData);
     if (this.CategoryData) {
       this.CategoryId = this.CategoryData.id;
-      this.category.patchValue({
-        name: this.CategoryData.name,
-        arabic_name: this.CategoryData.arabic_name
-      })
+      this.name = this.CategoryData.name;
+      this.arabic_name = this.CategoryData.arabic_name;
     }
   }
   ngOnDestroy(): void {
@@ -50,15 +38,14 @@ export class AddMainCategoryComponent implements OnInit, OnDestroy {
   }
   onSubmit() {
     this.spinner.show();
-    const formData = new FormData();
-    formData.append('name', this.category.get('name').value)
-    formData.append('arabic_name', this.category.get('arabic_name').value)
-
     if (this.CategoryData) {
-      console.log('update called')
-      formData.append('id', this.CategoryId)
-      console.log('submit data ', this.category.value);
-      this.categoryService.update(formData).subscribe(res => {
+      const data = {
+        id: this.CategoryId,
+        name: this.name,
+        arabic_name: this.arabic_name
+      }
+      console.log(data);
+      this.categoryService.update(data).subscribe(res => {
         console.log('category add', res);
         this.spinner.hide();
         this.toastr.success('Category has been updated successfully', 'Category Updated');
@@ -75,7 +62,11 @@ export class AddMainCategoryComponent implements OnInit, OnDestroy {
       })
     } else {
       console.log('create called')
-      this.categoryService.create(formData).subscribe(res => {
+      const data = {
+        name: this.name,
+        arabic_name: this.arabic_name
+      }
+      this.categoryService.create(data).subscribe(res => {
         console.log('category add', res)
         this.spinner.hide();
         this.toastr.success('Category has been added successfully', 'Category Added');
@@ -93,28 +84,4 @@ export class AddMainCategoryComponent implements OnInit, OnDestroy {
     }
   }
 
-  onFileChange(event) {
-    if (event.target.files && event.target.files.length) {
-      const file = event.target.files[0];
-      this.category.get('image').setValue(file);
-    }
-  }
-  testCall() {
-    console.log('test method called')
-    this.spinner.show();
-    const formData = new FormData();
-    formData.append('image', this.category.get('image').value)
-    formData.append('name', this.category.get('name').value)
-    formData.append('name_arabic', this.category.get('name_arabic').value)
-    formData.append('date', '2020-02-17' );
-
-
-    this.categoryService.createMainCategory(formData).subscribe(res => {
-      console.log(res);
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-      console.log(err);
-    })
-  }
 }
