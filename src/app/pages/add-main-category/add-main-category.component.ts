@@ -17,6 +17,12 @@ export class AddMainCategoryComponent implements OnInit, OnDestroy {
     name: new FormControl(''),
     arabic_name: new FormControl('')
   });
+  // category = new FormGroup({
+  //   name: new FormControl(''),
+  //   name_arabic: new FormControl(''),
+  //   image: new FormControl(null),
+  //   date: new FormControl('')
+  // });
   CategoryId;
   CategoryData;
 
@@ -87,4 +93,28 @@ export class AddMainCategoryComponent implements OnInit, OnDestroy {
     }
   }
 
+  onFileChange(event) {
+    if (event.target.files && event.target.files.length) {
+      const file = event.target.files[0];
+      this.category.get('image').setValue(file);
+    }
+  }
+  testCall() {
+    console.log('test method called')
+    this.spinner.show();
+    const formData = new FormData();
+    formData.append('image', this.category.get('image').value)
+    formData.append('name', this.category.get('name').value)
+    formData.append('name_arabic', this.category.get('name_arabic').value)
+    formData.append('date', '2020-02-17' );
+
+
+    this.categoryService.createMainCategory(formData).subscribe(res => {
+      console.log(res);
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+      console.log(err);
+    })
+  }
 }
